@@ -17,3 +17,7 @@ with zero real knowledge of how cycle.js works, this took me about 6 hours...
 8. remaining time actually coding, lazily skimming the cycle.js docs, and looking at my broken crap
 
 i'll try to write a blog post about this sometime.
+
+# demo
+
+http://justinwoo.github.io/cycle-scroll-table
