@@ -1,7 +1,7 @@
 function intent(DOM) {
   let actions = {
     userScrolled$: DOM.get('#scroll-table-container', 'scroll')
-      .map(e => e.srcElement.scrollTop)
+      .map(e => e.target.scrollTop)
   };
   return actions;
 }
