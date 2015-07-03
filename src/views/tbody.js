@@ -1,10 +1,10 @@
 import {h} from '@cycle/web';
 
-var getTBody = (rowHeight, visibleIndices) => {
-  var nodes = visibleIndices.map(index => {
+function renderTBody(rowHeight, visibleIndices) {
+  let nodes = visibleIndices.map(index => {
     // hack to get tables to look nice by setting col width
-    var tdStyle = {width: (window.innerWidth / 3) + 'px'};
-    var top = index * rowHeight;
+    let tdStyle = {width: (window.innerWidth / 3) + 'px'};
+    let top = index * rowHeight;
     return h(
       'tr',
       {
@@ -26,4 +26,4 @@ var getTBody = (rowHeight, visibleIndices) => {
   return h('tbody', nodes);
 };
 
-export default getTBody;
+export default renderTBody;

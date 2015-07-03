@@ -1,35 +1,15 @@
 import Cycle from '@cycle/core';
-import CycleWeb from '@cycle/web';
+import {h} from '@cycle/web';
 
-import getTHead from './thead';
-import getTBody from './tbody';
+import renderTHead from './thead';
+import renderTBody from './tbody';
 
-import {
-  tableHeightBehavior,
-  rowHeightBehavior,
-  columnsBehavior,
-  rowCountBehavior
-} from '../values';
-
-import visibleIndicesStream from '../streams/visible-indices-stream';
-
-var MainView = Cycle.Rx.Observable.combineLatest(
-  tableHeightBehavior,
-  rowHeightBehavior,
-  columnsBehavior,
-  rowCountBehavior,
-  visibleIndicesStream,
-  (
-    tableHeight,
-    rowHeight,
-    columns,
-    rowCount,
-    visibleIndices
-  ) => {
-    return CycleWeb.h(
+function view(state$) {
+  return state$.map(({tableHeight, rowHeight, columns, rowCount, visibleIndices}) =>
+    h(
       'div#app-container',
       [
-        CycleWeb.h(
+        h(
           'table#static-header-table',
           {
             style: {
@@ -37,9 +17,9 @@ var MainView = Cycle.Rx.Observable.combineLatest(
               borderBottom: '1px solid black'
             }
           },
-          getTHead(columns)
+          renderTHead(columns)
         ),
-        CycleWeb.h(
+        h(
           'div#scroll-table-container',
           {
             style: {
@@ -49,19 +29,19 @@ var MainView = Cycle.Rx.Observable.combineLatest(
               height: tableHeight + 'px',
             }
           },
-          CycleWeb.h(
+          h(
             'table#scroll-table',
             {
               style: {
                 height: rowCount * rowHeight + 'px'
               }
             },
-            getTBody(rowHeight, visibleIndices)
+            renderTBody(rowHeight, visibleIndices)
           )
         )
       ]
-    );
-  }
-);
+    )
+  );
+}
 
-export default MainView;
+export default view;
