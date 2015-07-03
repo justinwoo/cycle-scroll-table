@@ -3,6 +3,10 @@ a scroll table using cycle.js
 
 similar to https://github.com/justinwoo/react-rxjs-scroll and https://github.com/justinwoo/godforsaken-dynamic-width-scroll-table
 
+# blog post
+
+see the blog post for this project here: http://qiita.com/kimagure/items/d29ed7b7bdaaf6977b9a
+
 # time taken for initial commit/version
 
 with zero real knowledge of how cycle.js works, this took me about 6 hours...
