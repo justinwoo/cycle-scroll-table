@@ -1,6 +1,6 @@
 import {Rx} from '@cycle/core';
 
-import makeVisibleIndices$ from './visible-indices-stream';
+import makeVisibleIndices$ from './make-visible-indices';
 
 function model(actions) {
   let tableHeight$ = Rx.Observable.just(500);
