@@ -1,4 +1,4 @@
-import {Rx} from '@cycle/core';
+import Rx from 'rx';
 
 import makeVisibleIndices$ from './make-visible-indices';
 
@@ -7,7 +7,7 @@ function model(actions) {
   let rowHeight$ = Rx.Observable.just(30);
   let columns$ = Rx.Observable.just(['ID', 'ID * 10', 'Random Number']);
   let rowCount$ = Rx.Observable.just(10000);
-  let scrollTop$ = actions.userScrolled$.startWith(0);
+  let scrollTop$ = actions.scrollTop$.startWith(0);
   let visibleIndices$ = makeVisibleIndices$(
     tableHeight$, rowHeight$, rowCount$, scrollTop$
   );

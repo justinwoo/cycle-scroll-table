@@ -1,4 +1,4 @@
-import {Rx} from '@cycle/core';
+import Rx from 'rx';
 
 function makeVisibleIndices$(tableHeight$, rowHeight$, rowCount$, scrollTop$) {
   let firstVisibleRow$ = Rx.Observable.combineLatest(scrollTop$, rowHeight$,

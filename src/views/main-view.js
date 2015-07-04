@@ -1,47 +1,48 @@
-import Cycle from '@cycle/core';
-import {h} from '@cycle/web';
+import React from 'react';
+
+import {handleOnScroll} from '../intents/user-scroll';
 
 import renderTHead from './thead';
 import renderTBody from './tbody';
 
 function view(state$) {
-  return state$.map(({tableHeight, rowHeight, columns, rowCount, visibleIndices}) =>
-    h(
-      'div#app-container',
-      [
-        h(
-          'table#static-header-table',
-          {
-            style: {
-              overflowX: 'hidden',
-              borderBottom: '1px solid black'
-            }
-          },
-          renderTHead(columns)
-        ),
-        h(
-          'div#scroll-table-container',
-          {
-            style: {
-              position: 'relative',
-              overflowX: 'hidden',
-              borderBottom: '1px solid black',
-              height: tableHeight + 'px',
-            }
-          },
-          h(
-            'table#scroll-table',
-            {
-              style: {
-                height: rowCount * rowHeight + 'px'
-              }
-            },
-            renderTBody(rowHeight, visibleIndices)
-          )
-        )
-      ]
-    )
-  );
+  let react$ = state$.map(({
+    tableHeight,
+    rowHeight,
+    columns,
+    rowCount,
+    visibleIndices
+  }) => {
+    let staticHeaderTableStyle = {
+      overflowX: 'hidden',
+      borderBottom: '1px solid black'
+    };
+
+    let scrollTableContainerStyle = {
+      position: 'relative',
+      overflowX: 'hidden',
+      borderBottom: '1px solid black',
+      height: tableHeight + 'px',
+    };
+
+    return (
+      <div id="app-container">
+        <div className="static-header-table-container">
+          <table
+            className="static-header-table" style={staticHeaderTableStyle}>
+            {renderTHead(columns)}
+          </table>
+        </div>
+        <div className="scroll-table-container" style={scrollTableContainerStyle} onScroll={handleOnScroll}>
+          <table className="scroll-table" style={{height: rowCount * rowHeight + 'px'}}>
+            {renderTBody(rowHeight, visibleIndices)}
+          </table>
+        </div>
+      </div>
+    );
+  });
+
+  return react$;
 }
 
 export default view;

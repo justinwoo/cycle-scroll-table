@@ -1,7 +1,8 @@
-function intent(DOM) {
+import {scrollTop$} from './intents/user-scroll';
+
+function intent() {
   let actions = {
-    userScrolled$: DOM.get('#scroll-table-container', 'scroll')
-      .map(e => e.target.scrollTop)
+    scrollTop$
   };
   return actions;
 }

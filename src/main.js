@@ -1,19 +1,17 @@
-import Cycle from '@cycle/core';
-import CycleWeb from '@cycle/web';
+import React from 'react';
 
 import intent from './intent';
 import model from './models/main-model';
 import view from './views/main-view';
 
-function main({DOM}) {
-  let actions = intent(DOM);
+function main() {
+  let actions = intent();
   let state$ = model(actions);
-  let vtree$ = view(state$);
-  return { DOM: vtree$ };
+  let output$ = view(state$);
+
+  return output$;
 }
 
-let drivers = {
-  DOM: CycleWeb.makeDOMDriver('#app')
-};
+let target = document.getElementById('app');
 
-Cycle.run(main, drivers);
+main().subscribe(Output => React.render(Output, target));
